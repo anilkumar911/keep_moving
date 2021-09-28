@@ -5,13 +5,13 @@ enum FuelType {
   electric
 }
 
-class VehicleModel{
+class Vehicle{
   String brandName;
   int brandId;
   String modelName;
   String modelId;
   FuelType fuelType;
-  VehicleModel(this.brandName, this.brandId, this.modelName, this.modelId,  this.fuelType);
+  Vehicle(this.brandName, this.brandId, this.modelName, this.modelId,  this.fuelType);
 }
 
 class VehicleBrand{
@@ -26,33 +26,32 @@ class VehicleBrand{
 /// Best would be to cache the list and update if brand list has changed at the
 /// backend.
 class WheelsJoyModelUtils{
-  List<VehicleBrand> getAllCarBrands(){
+  static List<VehicleBrand> getAllCarBrands(){
     return [
       VehicleBrand(
-        'assets/carLogos/marutisuzuki.png',
+        'carLogos/marutisuzuki.png',
         'Maruti Suzuki',
       ),
       VehicleBrand(
-        'assets/carLogos/tata.png',
+        'carLogos/tata.png',
         'TATA Motors',
       ),
       VehicleBrand(
-        'assets/carLogos/mahindra.jpg',
+        'carLogos/mahindra.jpg',
         'Mahindra',
       ),
       VehicleBrand(
-        'assets/carLogos/hyundai.png',
+        'carLogos/hyundai.png',
         'Hyundai',
       ),
       VehicleBrand(
-        'assets/carLogos/toyota.png',
+        'carLogos/toyota.png',
         'Toyota',
       ),
       VehicleBrand(
-        'assets/carLogos/ford.png',
+        'carLogos/ford.png',
         'Ford',
       ),
-
     ];
   }
 }

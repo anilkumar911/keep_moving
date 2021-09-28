@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keep_moving/screens/other.dart';
 import 'package:keep_moving/screens/home.dart';
+import 'package:keep_moving/screens/car_brand_selector.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  HomeScreen(),
+      home:  BrandSelectorScreen(),
     );
   }
 }
