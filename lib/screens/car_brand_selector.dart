@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:keep_moving/models/vehicle_model.dart';
+import 'package:get/get.dart';
+import 'package:keep_moving/screens/car_model_selector.dart';
+
 
 class BrandSelectorScreen extends StatelessWidget {
   const BrandSelectorScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +28,21 @@ class BrandSelectorScreen extends StatelessWidget {
   }
 }
 
+
 Widget brandCard(VehicleBrand brand) {
   return InkWell(
       child: Card(
-        margin: EdgeInsets.fromLTRB(32, 32, 32, 32),
-        child: SizedBox(
-          height: 200,
-            width: 200,
-            child: Image.asset(brand.brandIcon)
-        )
+          margin: EdgeInsets.fromLTRB(32, 32, 32, 32),
+          child: SizedBox(
+              height: 200,
+              width: 200,
+              child: Image.asset(brand.brandIcon)
+          )
       ),
-    onTap: (){
+      onTap: (){
         print('Tapped ${brand.brandName}');
-    }
+        //Get.to( ModelSelectorScreen(brand.brandName));
+        Get.to( ModelSelectorScreen(5));
+      }
   );
 }
