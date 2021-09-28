@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 import 'package:keep_moving/controllers/counter_controller.dart';
 import 'package:keep_moving/screens/other.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final counterController = Get.put(CounterController());
-    print('In build function of *** home.dart ***');
+    print('In build function of *** BrandSelector ***');
     return Scaffold(
         body: Obx(() => Center(
           child :

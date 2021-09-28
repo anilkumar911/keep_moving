@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keep_moving/models/vehicle_model.dart';
 
 class BrandSelectorScreen extends StatelessWidget {
   const BrandSelectorScreen({Key? key}) : super(key: key);
@@ -6,25 +7,28 @@ class BrandSelectorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const title = 'Choose the brand of your Car';
-
+    var brands = WheelsJoyModelUtils.getAllCarBrands();
     return Scaffold(
       appBar: AppBar(
         title: const Text(title),
       ),
-      body: GridView.count(
-        // Create a grid with 2 columns. If you change the scrollDirection to
-        // horizontal, this produces 2 rows.
-        crossAxisCount: 2,
-        // Generate 100 widgets that display their index in the List.
-        children: List.generate(100, (index) {
-          return Center(
-            child: Text(
-              'Item $index',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-          );
-        }),
-      ),
+      body: GridView.builder(
+          itemCount: brands.length,
+          gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (BuildContext context, int index) {
+            return brandCard(brands[index]);
+          }),
     );
   }
+}
+
+Widget brandCard(VehicleBrand brand){
+  return Card(
+    margin: EdgeInsets.fromLTRB(32, 32, 32, 32),
+    child: SizedBox(
+        height:200,
+        width:200,
+        child:Image.asset(brand.brandIcon))
+  );
 }
