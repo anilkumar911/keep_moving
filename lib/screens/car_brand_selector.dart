@@ -14,6 +14,7 @@ class BrandSelectorScreen extends StatelessWidget {
       ),
       body: GridView.builder(
           itemCount: brands.length,
+          shrinkWrap:true,
           gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (BuildContext context, int index) {
@@ -23,12 +24,18 @@ class BrandSelectorScreen extends StatelessWidget {
   }
 }
 
-Widget brandCard(VehicleBrand brand){
-  return Card(
-    margin: EdgeInsets.fromLTRB(32, 32, 32, 32),
-    child: SizedBox(
-        height:200,
-        width:200,
-        child:Image.asset(brand.brandIcon))
+Widget brandCard(VehicleBrand brand) {
+  return InkWell(
+      child: Card(
+        margin: EdgeInsets.fromLTRB(32, 32, 32, 32),
+        child: SizedBox(
+          height: 200,
+            width: 200,
+            child: Image.asset(brand.brandIcon)
+        )
+      ),
+    onTap: (){
+        print('Tapped ${brand.brandName}');
+    }
   );
 }
