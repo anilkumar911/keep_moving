@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:keep_moving/controllers/counter_controller.dart';
 
-class OtherScreen extends StatelessWidget {
-  const OtherScreen({Key? key}) : super(key: key);
+class BrandSelectorScreen extends StatelessWidget {
+  const BrandSelectorScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final CounterController _counterController = Get.find();
-    print ('In build function of Other.dart');
+    const title = 'Choose the brand of your Car';
+
     return Scaffold(
-        body: Center(
-            child:Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Screen was clicked ${_counterController.counter.value}'),
-                  const SizedBox(height:10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: const Text("Go Back"),
-                  )
-                ]
-            )
-        )
+      appBar: AppBar(
+        title: const Text(title),
+      ),
+      body: GridView.count(
+        // Create a grid with 2 columns. If you change the scrollDirection to
+        // horizontal, this produces 2 rows.
+        crossAxisCount: 2,
+        // Generate 100 widgets that display their index in the List.
+        children: List.generate(100, (index) {
+          return Center(
+            child: Text(
+              'Item $index',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          );
+        }),
+      ),
     );
   }
 }
