@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/wheelsjoy/keep_moving/BuildConfig.java
+ com.wheelsjoy.keep_moving.BuildConfig
