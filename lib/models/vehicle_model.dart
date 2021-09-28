@@ -48,6 +48,11 @@ class WheelsJoyModelUtils{
         'assets/carLogos/toyota.png',
         'Toyota',
       ),
+      VehicleBrand(
+        'assets/carLogos/ford.png',
+        'Ford',
+      ),
+
     ];
   }
 }
