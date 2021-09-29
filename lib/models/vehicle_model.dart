@@ -38,49 +38,49 @@ class WheelsJoyModelUtils{
       VehicleModel(
         'Verito',
         1,
-        'carmodels/mahindra/verito.jpg'
+        'assets/carModels/mahindra/verito.jpg'
       ),
       VehicleModel(
           'Scorpio',
           2,
-          'carmodels/mahindra/scorpio.png'
+          'assets/carModels/mahindra/scorpio.png'
       ),
       VehicleModel(
           'Bolero',
           3,
-          'carmodels/mahindra/bolero.png'
+          'assets/carModels/mahindra/bolero.png'
       ),
       VehicleModel(
           'XUV500',
           4,
-          'carmodels/mahindra/xuv500.png'
+          'assets/carModels/mahindra/xuv500.png'
       ),
     ];
   }
   static List<VehicleBrand> getAllCarBrands(){
     return [
       VehicleBrand(
-        'carLogos/marutisuzuki.png',
+        'assets/carLogos/marutisuzuki.png',
         'Maruti Suzuki',
       ),
       VehicleBrand(
-        'carLogos/tata.png',
+        'assets/carLogos/tata.png',
         'TATA Motors',
       ),
       VehicleBrand(
-        'carLogos/mahindra.jpg',
+        'assets/carLogos/mahindra.jpg',
         'Mahindra',
       ),
       VehicleBrand(
-        'carLogos/hyundai.png',
+        'assets/carLogos/hyundai.png',
         'Hyundai',
       ),
       VehicleBrand(
-        'carLogos/toyota.png',
+        'assets/carLogos/toyota.png',
         'Toyota',
       ),
       VehicleBrand(
-        'carLogos/ford.png',
+        'assets/carLogos/ford.png',
         'Ford',
       ),
     ];
