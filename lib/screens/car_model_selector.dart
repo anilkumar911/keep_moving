@@ -45,29 +45,32 @@ Widget modelCard(VehicleModel model, BuildContext context) {
       ),
       onTap: () async {
         print('Tapped ${model.modelName}');
-        await showInformationDialog(context);
+        //if (model.fuelOptions.length)
+        await showInformationDialog(context, model.fuelOptions);
       }
   );
 }
 
-const fuelTypes = ['Petrol', 'Diesel', 'CNG', 'Electric'];
-int _selected_fuel_type = 0;
-
-Future<void> showInformationDialog(BuildContext context) async {
+Future<void> showInformationDialog(BuildContext context, List<String> fuelOptions) async {
   return await showDialog(context: context,
       builder: (context) {
-        return FuelSelectionDIalog();
+        return FuelSelectionDialog(fuelOptions);
       }
   );
 }
 
-class FuelSelectionDIalog extends StatefulWidget {
+class FuelSelectionDialog extends StatefulWidget {
+  final List<String> fuelOptions;
+  const FuelSelectionDialog(this.fuelOptions, {Key? key}) : super(key: key);
   @override
-  State<FuelSelectionDIalog> createState() => _FuelSelectionDIalogState();
+  State<FuelSelectionDialog> createState() => _FuelSelectionDialogState(fuelOptions);
 }
 
-class _FuelSelectionDIalogState extends State<FuelSelectionDIalog> {
-  int _selected_fuel_type_s = 0;
+class _FuelSelectionDialogState extends State<FuelSelectionDialog> {
+  List<String> fuelOptions;
+  _FuelSelectionDialogState(this.fuelOptions);
+
+  int _selectedFuelType = 0;
 
   void _setFuelType(int fuelType) {
     setState(() {
@@ -76,8 +79,8 @@ class _FuelSelectionDIalogState extends State<FuelSelectionDIalog> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _selected_fuel_type_s = fuelType;
-      print('in set state. Setting fuel type ${_selected_fuel_type_s}');
+      _selectedFuelType = fuelType;
+      print('in set state. Setting fuel type $_selectedFuelType');
     });
   }
 
@@ -85,18 +88,19 @@ class _FuelSelectionDIalogState extends State<FuelSelectionDIalog> {
   Widget build(BuildContext context) {
     print ("Building Alert dialog");
     return AlertDialog(
+      title: const Text('Choose Fuel Variant'),
       content: SizedBox(
           width:50,
           height:200,
           child: ListView.builder(
-              itemCount: fuelTypes.length,
+              itemCount: fuelOptions.length,
               itemBuilder: (BuildContext context, int index){
                 return ListTile(
-                    title: Text(fuelTypes[index]),
-                    selected: index == _selected_fuel_type_s,
+                    title: Text(fuelOptions[index]),
+                    selected: index == _selectedFuelType,
                     onTap: (){
                       //_selected_fuel_type = index;
-                      print('selected fuel type ${fuelTypes[index]}');
+                      print('selected fuel type ${fuelOptions[index]}');
                       _setFuelType(index);
                     }
                 );
@@ -104,11 +108,23 @@ class _FuelSelectionDIalogState extends State<FuelSelectionDIalog> {
           )),
       actions: <Widget>[
         TextButton(
-          child: Text('Add Car'),
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.black87),
+          ),
+          child: const Text('Back'),
           onPressed: () {
             Navigator.of(context).pop();
           },
-        )
+        ),
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.black87),
+          ),
+          child: const Text('Add Car'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ],
     );
   }
