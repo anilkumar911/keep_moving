@@ -21,11 +21,12 @@ class VehicleBrand{
 }
 
 class VehicleModel {
+  String brand;
   String modelName;
   int modelId;
   String modelIcon;
   List<String> fuelOptions;
-  VehicleModel(this.modelName, this.modelId, this.modelIcon, this.fuelOptions);
+  VehicleModel(this.brand, this.modelName, this.modelId, this.modelIcon, this.fuelOptions);
 }
 
 /// Returns the list of all car brands supported by wheelsJoy
@@ -37,24 +38,28 @@ class WheelsJoyModelUtils{
   static List<VehicleModel> getModelsForBrand(int brandId){
     return [
       VehicleModel(
+        'Mahindra',
         'Verito',
         1,
         'assets/carModels/mahindra/verito.jpg',
         ['Diesel','Petrol'],
       ),
       VehicleModel(
+        'Mahindra',
         'Scorpio',
         2,
         'assets/carModels/mahindra/scorpio.png',
         ['Diesel'],
       ),
       VehicleModel(
+        'Mahindra',
         'Bolero',
         3,
         'assets/carModels/mahindra/bolero.png',
         ['Diesel'],
       ),
       VehicleModel(
+        'Mahindra',
         'XUV500',
         4,
         'assets/carModels/mahindra/xuv500.png',

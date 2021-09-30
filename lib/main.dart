@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:keep_moving/models/my_vehilce.dart';
 import 'package:keep_moving/screens/other.dart';
 import 'package:keep_moving/screens/home.dart';
 import 'package:keep_moving/screens/car_brand_selector.dart';
+import 'package:keep_moving/database/vehicle_database.dart';
 
-void main() {
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  Future<List<MyVehicle>> getMyVehicles() async {
+    List<MyVehicle> myVehicles = await VehiclesDatabase.instance.getAllVehicles();
+    return myVehicles;
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

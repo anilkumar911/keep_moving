@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:keep_moving/models/vehicle_model.dart';
+import 'package:keep_moving/models/my_vehilce.dart';
+import 'package:keep_moving/constants/constants.dart';
+import 'package:keep_moving/database/vehicle_database.dart';
 
 class ModelSelectorScreen extends StatelessWidget {
 
@@ -46,39 +49,40 @@ Widget modelCard(VehicleModel model, BuildContext context) {
       onTap: () async {
         print('Tapped ${model.modelName}');
         //if (model.fuelOptions.length)
-        await showInformationDialog(context, model.fuelOptions);
+        await showFuelSelectionDialog(context, model.fuelOptions, model.brand, model.modelName);
       }
   );
 }
 
-Future<void> showInformationDialog(BuildContext context, List<String> fuelOptions) async {
+Future<void> showFuelSelectionDialog(BuildContext context, List<String> fuelOptions, String brand, String model) async {
   return await showDialog(context: context,
       builder: (context) {
-        return FuelSelectionDialog(fuelOptions);
+        return FuelSelectionDialog(fuelOptions, brand, model);
       }
   );
 }
 
 class FuelSelectionDialog extends StatefulWidget {
   final List<String> fuelOptions;
-  const FuelSelectionDialog(this.fuelOptions, {Key? key}) : super(key: key);
+  final String brand;
+  final String model;
+
+  const FuelSelectionDialog(this.fuelOptions, this.brand, this.model, {Key? key}) : super(key: key);
   @override
-  State<FuelSelectionDialog> createState() => _FuelSelectionDialogState(fuelOptions);
+  State<FuelSelectionDialog> createState() => _FuelSelectionDialogState(fuelOptions, brand, model);
 }
 
 class _FuelSelectionDialogState extends State<FuelSelectionDialog> {
   List<String> fuelOptions;
-  _FuelSelectionDialogState(this.fuelOptions);
+  final String brand;
+  final String model;
+
+  _FuelSelectionDialogState(this.fuelOptions, this.brand, this.model);
 
   int _selectedFuelType = 0;
 
   void _setFuelType(int fuelType) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _selectedFuelType = fuelType;
       print('in set state. Setting fuel type $_selectedFuelType');
     });
@@ -88,7 +92,10 @@ class _FuelSelectionDialogState extends State<FuelSelectionDialog> {
   Widget build(BuildContext context) {
     print ("Building Alert dialog");
     return AlertDialog(
-      title: const Text('Choose Fuel Variant'),
+      title: const Text('⛽ Choose Fuel Variant',
+                    style: TextStyle(
+                      color:wheelsJoyFormTitleColor
+                    )),
       content: SizedBox(
           width:50,
           height:200,
@@ -108,25 +115,27 @@ class _FuelSelectionDialogState extends State<FuelSelectionDialog> {
           )),
       actions: <Widget>[
         TextButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.black87),
-          ),
+          style: wheelsJoyFormButtonStyle,
           child: const Text('Back'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.black87),
-          ),
+          style: wheelsJoyFormButtonStyle,
           child: const Text('Add Car'),
-          onPressed: () {
+          onPressed: () async {
+            try {
+              await VehiclesDatabase.instance.create(MyVehicle(
+                  0, brand, model, fuelOptions[_selectedFuelType], "model_id",
+                  "reg_num"));
+            }catch (exception) {
+              print ('Caught Exception');
+            }
             Navigator.of(context).pop();
           },
         ),
       ],
     );
   }
-
 }
